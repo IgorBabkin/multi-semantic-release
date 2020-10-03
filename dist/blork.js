@@ -1,14 +1,14 @@
-const { existsSync, lstatSync } = require("fs");
-const { checker, check, add, ValueError } = require("blork");
-const { Writable } = require("stream");
-const { WritableStreamBuffer } = require("stream-buffers");
+var _a = require("fs"), existsSync = _a.existsSync, lstatSync = _a.lstatSync;
+var _b = require("blork"), checker = _b.checker, check = _b.check, add = _b.add, ValueError = _b.ValueError;
+var Writable = require("stream").Writable;
+var WritableStreamBuffer = require("stream-buffers").WritableStreamBuffer;
 // Get some checkers.
-const isAbsolute = checker("absolute");
+var isAbsolute = checker("absolute");
 // Add a directory checker.
-add("directory", (v) => isAbsolute(v) && existsSync(v) && lstatSync(v).isDirectory(), "directory that exists in the filesystem");
+add("directory", function (v) { return isAbsolute(v) && existsSync(v) && lstatSync(v).isDirectory(); }, "directory that exists in the filesystem");
 // Add a writable stream checker.
 add("stream", 
 // istanbul ignore next (not important)
-(v) => v instanceof Writable || v instanceof WritableStreamBuffer, "instance of stream.Writable or WritableStreamBuffer");
+function (v) { return v instanceof Writable || v instanceof WritableStreamBuffer; }, "instance of stream.Writable or WritableStreamBuffer");
 // Exports.
-module.exports = { checker, check, ValueError };
+module.exports = { checker: checker, check: check, ValueError: ValueError };

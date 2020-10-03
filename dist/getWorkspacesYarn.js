@@ -1,6 +1,6 @@
-const getManifest = require("./getManifest");
-const glob = require("./glob");
-const { checker } = require("./blork");
+var getManifest = require("./getManifest");
+var glob = require("./glob");
+var checker = require("./blork").checker;
 /**
  * Return array of package.json for Yarn workspaces.
  *
@@ -9,8 +9,8 @@ const { checker } = require("./blork");
  */
 function getWorkspacesYarn(cwd) {
     // Load package.json
-    const manifest = getManifest(`${cwd}/package.json`);
-    let packages = manifest.workspaces;
+    var manifest = getManifest(cwd + "/package.json");
+    var packages = manifest.workspaces;
     if (packages && packages.packages) {
         packages = packages.packages;
     }
@@ -19,7 +19,7 @@ function getWorkspacesYarn(cwd) {
         throw new TypeError("package.json: workspaces or workspaces.packages: Must be non-empty array of string");
     }
     // Turn workspaces into list of package.json files.
-    const workspaces = glob(packages.map((p) => p.replace(/\/?$/, "/package.json")), {
+    var workspaces = glob(packages.map(function (p) { return p.replace(/\/?$/, "/package.json"); }), {
         cwd: cwd,
         realpath: true,
         ignore: "**/node_modules/**",

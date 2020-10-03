@@ -1,6 +1,6 @@
-const EventEmitter = require("promise-events");
-const { identity } = require("lodash");
-const debug = require("debug")("msr:synchronizer");
+var EventEmitter = require("promise-events");
+var identity = require("lodash").identity;
+var debug = require("debug")("msr:synchronizer");
 /**
  * Cross-packages synchronization context.
  * @typedef Synchronizer
@@ -16,57 +16,58 @@ const debug = require("debug")("msr:synchronizer");
  * @param {Package[]} packages The multi-semantic-release context.
  * @returns {Synchronizer} Shared sync assets.
  */
-const getSynchronizer = (packages) => {
-    const ee = new EventEmitter();
-    const getEventName = (probe, pkg) => `${probe}${pkg ? ":" + pkg.name : ""}`;
+var getSynchronizer = function (packages) {
+    var ee = new EventEmitter();
+    var getEventName = function (probe, pkg) { return "" + probe + (pkg ? ":" + pkg.name : ""); };
     // List of packages which are still todo (don't yet have a result).
-    const todo = () => packages.filter((p) => p.result === undefined);
+    var todo = function () { return packages.filter(function (p) { return p.result === undefined; }); };
     // Emitter with memo: next subscribers will receive promises from the past if exists.
-    const store = {
+    var store = {
         evt: {},
         subscr: {},
     };
-    const emit = (probe, pkg) => {
-        const name = getEventName(probe, pkg);
+    var emit = function (probe, pkg) {
+        var name = getEventName(probe, pkg);
         debug("ready: %s", name);
         return store.evt[name] || (store.evt[name] = ee.emit(name));
     };
-    const once = (probe, pkg) => {
-        const name = getEventName(probe, pkg);
+    var once = function (probe, pkg) {
+        var name = getEventName(probe, pkg);
         return store.evt[name] || store.subscr[name] || (store.subscr[name] = ee.once(name));
     };
-    const waitFor = (probe, pkg) => {
-        const name = getEventName(probe, pkg);
+    var waitFor = function (probe, pkg) {
+        var name = getEventName(probe, pkg);
         return pkg[name] || (pkg[name] = once(probe, pkg));
     };
     // Status sync point.
-    const waitForAll = (probe, filter = identity) => {
-        const promise = once(probe);
+    var waitForAll = function (probe, filter) {
+        if (filter === void 0) { filter = identity; }
+        var promise = once(probe);
         if (todo()
             .filter(filter)
-            .every((p) => p.hasOwnProperty(probe))) {
+            .every(function (p) { return p.hasOwnProperty(probe); })) {
             debug("ready: %s", probe);
             emit(probe);
         }
         return promise;
     };
     // Only the first lucky package passes the probe.
-    const getLucky = (probe, pkg) => {
+    var getLucky = function (probe, pkg) {
         if (getLucky[probe]) {
             return;
         }
-        const name = getEventName(probe, pkg);
+        var name = getEventName(probe, pkg);
         debug("lucky: %s", name);
         getLucky[probe] = emit(probe, pkg);
     };
     return {
-        ee,
-        emit,
-        once,
-        todo,
-        waitFor,
-        waitForAll,
-        getLucky,
+        ee: ee,
+        emit: emit,
+        once: once,
+        todo: todo,
+        waitFor: waitFor,
+        waitForAll: waitForAll,
+        getLucky: getLucky,
     };
 };
 module.exports = getSynchronizer;

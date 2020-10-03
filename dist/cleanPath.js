@@ -1,5 +1,5 @@
-const { normalize, isAbsolute, join } = require("path");
-const { check } = require("./blork");
+var _a = require("path"), normalize = _a.normalize, isAbsolute = _a.isAbsolute, join = _a.join;
+var check = require("./blork").check;
 /**
  * Normalize and make a path absolute, optionally using a custom CWD.
  * Trims any trailing slashes from the path.
@@ -10,7 +10,8 @@ const { check } = require("./blork");
  *
  * @internal
  */
-function cleanPath(path, cwd = process.cwd()) {
+function cleanPath(path, cwd) {
+    if (cwd === void 0) { cwd = process.cwd(); }
     // Checks.
     check(path, "path: path");
     check(cwd, "cwd: absolute");

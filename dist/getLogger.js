@@ -1,4 +1,4 @@
-const { Signale } = require("signale");
+var Signale = require("signale").Signale;
 /**
  * Return a new Signale instance.
  * _Similar to get-logger.js in semantic-release_
@@ -9,7 +9,8 @@ const { Signale } = require("signale");
  *
  * @internal
  */
-function getLogger({ stdout, stderr }) {
+function getLogger(_a) {
+    var stdout = _a.stdout, stderr = _a.stderr;
     return new Signale({
         config: { displayTimestamp: true, displayLabel: false },
         // scope: "multirelease",

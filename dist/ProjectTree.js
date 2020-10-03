@@ -4,59 +4,72 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProjectTree = exports.ProjectTreeSourcesIterator = exports.ProjectTreeFactory = void 0;
-const graphlib_1 = require("graphlib");
-const object_hash_1 = __importDefault(require("object-hash"));
-class ProjectTreeFactory {
-    static createFromArray(packages) {
-        const tree = new ProjectTree(new graphlib_1.Graph());
-        packages.forEach(p => {
+var graphlib_1 = require("graphlib");
+var object_hash_1 = __importDefault(require("object-hash"));
+var ProjectTreeFactory = /** @class */ (function () {
+    function ProjectTreeFactory() {
+    }
+    ProjectTreeFactory.createFromArray = function (packages) {
+        var tree = new ProjectTree(new graphlib_1.Graph());
+        packages.forEach(function (p) {
             tree.setNode(p);
         });
-        packages.forEach(target => {
-            const source = packages.find(({ name }) => target.deps.includes(name));
+        packages.forEach(function (target) {
+            var source = packages.find(function (_a) {
+                var name = _a.name;
+                return target.deps.includes(name);
+            });
             if (source) {
                 tree.setDependency(source, target);
             }
         });
         return new ProjectTreeSourcesIterator(tree);
-    }
-}
+    };
+    return ProjectTreeFactory;
+}());
 exports.ProjectTreeFactory = ProjectTreeFactory;
-class ProjectTreeSourcesIterator {
-    constructor(tree) {
+var ProjectTreeSourcesIterator = /** @class */ (function () {
+    function ProjectTreeSourcesIterator(tree) {
         this.tree = tree;
     }
-    hasNext() {
+    ProjectTreeSourcesIterator.prototype.hasNext = function () {
         return !this.tree.isEmpty();
-    }
-    next() {
-        const sources = this.tree.sources();
-        this.tree = this.tree.filter((n) => !sources.map(({ name }) => name).includes(n.name));
+    };
+    ProjectTreeSourcesIterator.prototype.next = function () {
+        var sources = this.tree.sources();
+        this.tree = this.tree.filter(function (n) { return !sources.map(function (_a) {
+            var name = _a.name;
+            return name;
+        }).includes(n.name); });
         return sources;
-    }
-}
+    };
+    return ProjectTreeSourcesIterator;
+}());
 exports.ProjectTreeSourcesIterator = ProjectTreeSourcesIterator;
-class ProjectTree {
-    constructor(tree) {
+var ProjectTree = /** @class */ (function () {
+    function ProjectTree(tree) {
         this.tree = tree;
     }
-    isEmpty() {
+    ProjectTree.prototype.isEmpty = function () {
         return this.tree.sources().length === 0;
-    }
-    sources() {
-        return this.tree.sources().map((name) => this.tree.node(name));
-    }
-    filter(predicate) {
-        return new ProjectTree(this.tree.filterNodes((key) => {
-            let v = this.tree.node(key);
+    };
+    ProjectTree.prototype.sources = function () {
+        var _this = this;
+        return this.tree.sources().map(function (name) { return _this.tree.node(name); });
+    };
+    ProjectTree.prototype.filter = function (predicate) {
+        var _this = this;
+        return new ProjectTree(this.tree.filterNodes(function (key) {
+            var v = _this.tree.node(key);
             return predicate(v);
         }));
-    }
-    setNode(value) {
+    };
+    ProjectTree.prototype.setNode = function (value) {
         this.tree.setNode(object_hash_1.default(value), value);
-    }
-    setDependency(source, target) {
+    };
+    ProjectTree.prototype.setDependency = function (source, target) {
         this.tree.setEdge(object_hash_1.default(source), object_hash_1.default(target));
-    }
-}
+    };
+    return ProjectTree;
+}());
 exports.ProjectTree = ProjectTree;

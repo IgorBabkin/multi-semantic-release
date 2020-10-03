@@ -1,5 +1,5 @@
-const detectNewline = require("detect-newline");
-const detectIndent = require("detect-indent");
+var detectNewline = require("detect-newline");
+var detectIndent = require("detect-indent");
 /**
  * Information about the format of a file.
  * @typedef FileFormat
