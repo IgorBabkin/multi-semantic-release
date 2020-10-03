@@ -1,0 +1,243 @@
+[
+  {
+    "path": "/Users/igorbabkin/projects/monorepo/packages/a/package.json",
+    "dir": "/Users/igorbabkin/projects/monorepo/packages/a",
+    "name": "@igorbabkin/a",
+    "manifest": {
+      "name": "@igorbabkin/a",
+      "version": "1.0.15",
+      "description": "> TODO: description",
+      "author": "ibabkin <ibabkin@goodgamestudios.com>",
+      "homepage": "",
+      "license": "ISC",
+      "main": "lib/a.js",
+      "directories": {
+        "lib": "lib",
+        "test": "__tests__"
+      },
+      "files": [
+        "lib"
+      ],
+      "publishConfig": {
+        "access": "public"
+      },
+      "scripts": {
+        "test": "echo \"Error: run tests from root\" && exit 1"
+      },
+      "dependencies": {
+        "@igorbabkin/b": "1.0.12"
+      }
+    },
+    "deps": [
+      "@igorbabkin/b"
+    ],
+    "options": {
+      "branches": [
+        "master",
+        "next"
+      ],
+      "repositoryUrl": "git@gitlab.com:IgorBabkin/monorepo.git",
+      "tagFormat": "v${version}",
+      "plugins": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/release-notes-generator",
+        "@semantic-release/changelog",
+        "@semantic-release/npm",
+        [
+          "@semantic-release/git",
+          {
+            "message": "chore(release): ${nextRelease.name} [ignore-ci]\n\n${nextRelease.notes}"
+          }
+        ]
+      ]
+    },
+    "plugins": {},
+    "loggerRef": {}
+  },
+  {
+    "path": "/Users/igorbabkin/projects/monorepo/packages/b/package.json",
+    "dir": "/Users/igorbabkin/projects/monorepo/packages/b",
+    "name": "@igorbabkin/b",
+    "manifest": {
+      "name": "@igorbabkin/b",
+      "private": true,
+      "version": "1.0.12",
+      "description": "> TODO: description",
+      "author": "ibabkin <ibabkin@goodgamestudios.com>",
+      "homepage": "https://gitlab.com/IgorBabkin/monorepo#readme",
+      "license": "ISC",
+      "main": "lib/b.js",
+      "directories": {
+        "lib": "lib",
+        "test": "__tests__"
+      },
+      "files": [
+        "lib"
+      ],
+      "publishConfig": {
+        "access": "public"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+ssh://git@gitlab.com/IgorBabkin/monorepo.git"
+      },
+      "scripts": {
+        "test": "echo \"Error: run tests from root\" && exit 1"
+      },
+      "bugs": {
+        "url": "https://gitlab.com/IgorBabkin/monorepo/issues"
+      }
+    },
+    "deps": [],
+    "options": {
+      "branches": [
+        "master",
+        "next"
+      ],
+      "repositoryUrl": "git+ssh://git@gitlab.com/IgorBabkin/monorepo.git",
+      "tagFormat": "v${version}",
+      "plugins": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/release-notes-generator",
+        "@semantic-release/changelog",
+        "@semantic-release/npm",
+        [
+          "@semantic-release/git",
+          {
+            "message": "chore(release): ${nextRelease.name} [ignore-ci]\n\n${nextRelease.notes}"
+          }
+        ]
+      ]
+    },
+    "plugins": {},
+    "loggerRef": {}
+  },
+  {
+    "path": "/Users/igorbabkin/projects/monorepo/packages/test2/package.json",
+    "dir": "/Users/igorbabkin/projects/monorepo/packages/test2",
+    "name": "test2",
+    "manifest": {
+      "name": "test2",
+      "version": "1.1.11",
+      "private": true,
+      "description": "> TODO: description",
+      "author": "ibabkin <ibabkin@goodgamestudios.com>",
+      "homepage": "https://gitlab.com/IgorBabkin/monorepo#readme",
+      "license": "ISC",
+      "files": [
+        "lib"
+      ],
+      "repository": {
+        "type": "git",
+        "url": "git+ssh://git@gitlab.com/IgorBabkin/monorepo.git"
+      },
+      "scripts": {
+        "dev": "parcel serve -d public lib/index.html",
+        "build": "parcel build lib/index.html -d public",
+        "deploy:staging": "vercel deploy --confirm",
+        "test": "echo \"Error: run tests from root\" && exit 1"
+      },
+      "bugs": {
+        "url": "https://gitlab.com/IgorBabkin/monorepo/issues"
+      },
+      "dependencies": {
+        "@igorbabkin/b": "1.0.12",
+        "vue": "^2.6.12"
+      },
+      "devDependencies": {
+        "parcel": "^1.12.4"
+      }
+    },
+    "deps": [
+      "@igorbabkin/b",
+      "vue",
+      "parcel"
+    ],
+    "options": {
+      "branches": [
+        "master",
+        "next"
+      ],
+      "repositoryUrl": "git+ssh://git@gitlab.com/IgorBabkin/monorepo.git",
+      "tagFormat": "v${version}",
+      "plugins": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/release-notes-generator",
+        "@semantic-release/changelog",
+        "@semantic-release/npm",
+        [
+          "@semantic-release/git",
+          {
+            "message": "chore(release): ${nextRelease.name} [ignore-ci]\n\n${nextRelease.notes}"
+          }
+        ]
+      ]
+    },
+    "plugins": {},
+    "loggerRef": {}
+  },
+  {
+    "path": "/Users/igorbabkin/projects/monorepo/packages/test3/package.json",
+    "dir": "/Users/igorbabkin/projects/monorepo/packages/test3",
+    "name": "test3",
+    "manifest": {
+      "name": "test3",
+      "version": "1.1.12",
+      "private": true,
+      "description": "> TODO: description",
+      "author": "ibabkin <ibabkin@goodgamestudios.com>",
+      "homepage": "https://gitlab.com/IgorBabkin/monorepo#readme",
+      "license": "ISC",
+      "files": [
+        "lib"
+      ],
+      "repository": {
+        "type": "git",
+        "url": "git+ssh://git@gitlab.com/IgorBabkin/monorepo.git"
+      },
+      "scripts": {
+        "dev": "parcel serve -d public lib/index.html",
+        "build": "parcel build lib/index.html -d public",
+        "deploy:staging": "vercel deploy --confirm",
+        "test": "echo \"Error: run tests from root\" && exit 1"
+      },
+      "bugs": {
+        "url": "https://gitlab.com/IgorBabkin/monorepo/issues"
+      },
+      "dependencies": {
+        "@igorbabkin/b": "1.0.12",
+        "vue": "^2.6.12"
+      },
+      "devDependencies": {
+        "parcel": "^1.12.4"
+      }
+    },
+    "deps": [
+      "@igorbabkin/b",
+      "vue",
+      "parcel"
+    ],
+    "options": {
+      "branches": [
+        "master",
+        "next"
+      ],
+      "repositoryUrl": "git+ssh://git@gitlab.com/IgorBabkin/monorepo.git",
+      "tagFormat": "v${version}",
+      "plugins": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/release-notes-generator",
+        "@semantic-release/changelog",
+        "@semantic-release/npm",
+        [
+          "@semantic-release/git",
+          {
+            "message": "chore(release): ${nextRelease.name} [ignore-ci]\n\n${nextRelease.notes}"
+          }
+        ]
+      ]
+    },
+    "plugins": {},
+    "loggerRef": {}
+  }
+]

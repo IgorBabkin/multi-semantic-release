@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "allowJs": true,
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "sourceMap": false,
+    "declaration": false,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "target": "ES2017",
+    "resolveJsonModule": true,
+    "noImplicitAny": true
+  },
+  "include": [
+    "lib"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

@@ -4,8 +4,8 @@ module.exports = (flags) => {
 	}
 
 	// Imports.
-	const getWorkspacesYarn = require("../lib/getWorkspacesYarn");
-	const multiSemanticRelease = require("../lib/multiSemanticRelease");
+	const getWorkspacesYarn = require("../dist/getWorkspacesYarn");
+	const multiSemanticRelease = require("../dist/multiSemanticRelease");
 	const multisemrelPkgJson = require("../package.json");
 	const semrelPkgJson = require("semantic-release/package.json");
 
